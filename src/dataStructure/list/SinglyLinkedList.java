@@ -203,6 +203,25 @@ public class SinglyLinkedList<E> extends AbstractList<E> implements List<E> {
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || fromIndex >= this.size){
+            throw new IndexOutOfBoundsException();
+        }
+        if (toIndex < 0 || toIndex > this.size){
+            throw new IndexOutOfBoundsException();
+        }
+        if (fromIndex > toIndex){
+            throw new IndexOutOfBoundsException();
+        }
+        Point point = this.head;
+        for (int i = 0; i <= fromIndex; i++){
+            point = point.next;
+        }
+        StringBuffer sb = new StringBuffer();
+        for (int i = fromIndex; i < toIndex; i++){
+            sb.append(point.data);
+            point = point.next;
+        }
+
         return null;
     }
 
