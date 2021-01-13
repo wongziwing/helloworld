@@ -1,5 +1,6 @@
 package dataStructure.list;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -31,6 +32,7 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public boolean contains(Object o) {
+        checkNullEle(o);
         Node node = head;
         while (node.next != null){
             if (node.next.data == o){
@@ -50,16 +52,24 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] arr = new Object[this.size];
+        Node node = head;
+        for(int i = 0; i < this.size; i++){
+            arr[i] = node.next.data;
+            node = node.next;
+        }
+        return arr;
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
+
         return null;
     }
 
     @Override
     public boolean add(E e) {
+        checkNullEle(e);
         Node node = head;
         // 将指针移向最后一位
         while (node.next != null){
@@ -74,6 +84,7 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
+        checkNullEle(o);
         Node node = head;
         while (node.next != null){
             if (node.next.data == o){
@@ -89,22 +100,38 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        for (Object o : c) {
+            if (!contains(o)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        for (E e : c){
+            checkNullEle(e);
+            add(e);
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        checkArrIndex(index);
+        for (E e : c){
+            add(index++, e);
+        }
+        return true;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        for (Object o : c){
+            remove(o);
+        }
+        return true;
     }
 
     @Override
@@ -146,9 +173,16 @@ public class SinglyLinkedList<E> implements List<E> {
         }
     }
 
+    private void checkNullEle(Object o){
+        if (o == null){
+            throw new IllegalArgumentException();
+        }
+    }
+
     @Override
     public void add(int index, E element) {
         checkArrIndex(index);
+        checkNullEle(element);
         Node<E> node = head;
         for (int i = 1; i <= index; i++){
             node = node.next;
