@@ -8,13 +8,13 @@ import org.junit.Test;
  */
 public class TestSort {
 
-    private final int ARRAY_LENGTH = (int) 1e6;
+    private final int ARRAY_LENGTH = (int) 1e1;
 
     /** 打印数组 */
     void print(int[] arr){
         for (int i = 0; i < arr.length; i++){
             if (i == arr.length - 1){
-                System.out.print(arr[i]);
+                System.out.println(arr[i]);
             } else {
                 System.out.print(arr[i] + ", ");
             }
@@ -92,11 +92,11 @@ public class TestSort {
      */
     @Test
     public void insertSortTest(){
-        int[] arr = getRandomArray();
-        //int[] arr = getArrayByASC();
-        //int[] arr= getArrayByDES();
+//        int[] arr = getRandomArray();
+//        int[] arr = getArrayByASC();
+        int[] arr= getArrayByDES();
         ArraySort.insertSort(arr);
-//        print(arr);
+        print(arr);
         System.out.println(checkSort(arr));
     }
 

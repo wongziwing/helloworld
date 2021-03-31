@@ -47,12 +47,13 @@ public class ArraySort {
      */
     static void insertSort(int[] arr){
         for (int i = 0; i < arr.length - 1; i++){
-            for (int j = i-1; j >= 0; j--){
-                if (arr[i+1] < arr[j]){
+            int flag = i+1;
+            for (int j = i; j >= 0; j--){
+                if (arr[flag] < arr[j]){
                     int temp = arr[j];
-                    arr[j] = arr[i+1];
-                    arr[i+1] = temp;
-                    break;
+                    arr[j] = arr[flag];
+                    arr[flag] = temp;
+                    flag--;
                 }
             }
         }
